@@ -6,6 +6,11 @@
     list-style: none;
 }
 
+button {
+    border: none;
+    background: transparent;
+}
+
 main {
     height: 100dvh;
     display: flex;
@@ -27,4 +32,52 @@ section {
 a {
     color: black;
     cursor: text;
+}
+
+.button__start {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border: 3px solid red;
+    padding: 8px 16px;
+    background-color: green;
+}
+
+.game__body {
+    animation: backgroundAnimation 2s infinite;
+    animation-timing-function: steps(2, jump-end);
+}
+
+.banana {
+    height: 80px;
+}
+
+.game__header {
+    display: flex;
+    padding: 12px 24px;
+    justify-content: space-between;
+}
+
+@keyframes backgroundAnimation {
+    0% { background-color: #ff0000; }
+    5% { background-color: #00ff00; }
+    10% { background-color: #0000ff; }
+    15% { background-color: #ffff00; }
+    20% { background-color: #ff00ff; } 
+    25% { background-color: #00ffff; } 
+    30% { background-color: #ff6600; } 
+    35% { background-color: #6600ff; } 
+    40% { background-color: #00ff99; }
+    45% { background-color: #ff3399; } 
+    50% { background-color: #33cc33; }
+    55% { background-color: #9966ff; } 
+    60% { background-color: #ffcc00; }
+    65% { background-color: #cc0066; }
+    70% { background-color: #00ccff; }
+    75% { background-color: #ff3300; }
+    80% { background-color: #66ff66; }
+    85% { background-color: #cc00cc; } 
+    90% { background-color: #ffff66; }
+    95% { background-color: #ff6666; }
+    100% { background-color: #ff0000; }
 }
