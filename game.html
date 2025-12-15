@@ -4,20 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body class="game__body">
-    <header class="game__header">
-        <h1>Dougal says "Catch that banana!"</h1>
-        <button class="button__volume">
-            <img src="./assets/volume.svg" alt="volume">
-        </button>
-    </header>
-    <main class="main__game">
-        <button id="banana_button">
+    <div class="wrapper">
+        <header class="game__header">
+            <h1>Dougal says "Catch that banana!"</h1>
+            <div class="volume__container">
+                <button class="button__volume">
+                    <img src="./assets/volume.svg" alt="volume">
+                </button>
+                <input type="range" class="volume__slider" min="0" max="100" value="7">
+            </div>
+        </header>
+        <main class="main__game">
+            <button id="fake__button">
+                <img src="./assets/images.jpg" alt="banana" class="banana">
+            </button>
+        </main>
+    </div>
+    <div class="second__wrapper">
+        <p>He was talking about this one!</p>
+        <p>&darr; &darr; &darr;</p>
+        <button id="banana__button" class="real-button">
             <img src="./assets/images.jpg" alt="banana" class="banana">
         </button>
-    </main>
+    </div>
+    
 
     <script src="./script.js"></script>
 </body>

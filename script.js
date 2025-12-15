@@ -1,38 +1,70 @@
-const btn = document.getElementById("banana_button");
+const btn = document.getElementById("fake__button");
+const realBtn = document.getElementById("banana__button");
 const container = document.querySelector('.main__game');
+const volumeSlider = document.querySelector('.volume__slider');
+
+let volume = 0.07;
+const audio = new Audio('./assets/audio.mp3');
+
+audio.loop = true;
+audio.volume = volume;
 
 container.style.position = 'relative';
 btn.style.position = 'absolute';
 
-function moverBtn() {
-    const anchoCont = container.clientWidth - btn.clientWidth;
-    const altoCont = container.clientHeight - btn.clientHeight;
-    btn.style.left = Math.random() * anchoCont + 'px';
-    btn.style.top = Math.random() * altoCont + 'px';
+function moveBtn() {
+    const containerWidth = container.clientWidth - btn.clientWidth;
+    const containerHeight = container.clientHeight - btn.clientHeight;
+    
+    btn.style.left = Math.random() * containerWidth + 'px';
+    btn.style.top = Math.random() * containerHeight + 'px';
 }
 
-document.addEventListener('mousemove', (e) => {
+function handleMouseMove(e) {
     const rect = btn.getBoundingClientRect();
-    const centroX = rect.left + rect.width / 2;
-    const centroY = rect.top + rect.height / 2;
-    const distancia = Math.hypot(e.clientX - centroX, e.clientY - centroY);
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const distance = Math.hypot(e.clientX - centerX, e.clientY - centerY);
     
-    if (distancia < 200) moverBtn();
-});
+    if (distance < 200) moveBtn();
+}
 
-btn.addEventListener('click', () => {
-
+function handleRealButtonClick() {
     document.onmousemove = null;
-    
     alert('YOU WON!');
-    
-    btn.style.background = '#4CAF50';
-    btn.style.color = 'white';
-    btn.style.fontWeight = 'bold';
-    btn.style.border = '3px solid #2E7D32';
-    btn.innerHTML = '¡GANADO! 🍌';
-    
-    btn.disabled = true;
-});
+    realBtn.disabled = true;
+}
 
-window.onload = moverBtn;
+function handleFirstClick() {
+    if (audio.paused) audio.play();
+}
+
+function handleVolumeIncrease() {
+    if (volume < 1) {
+        volume += 0.07;
+        audio.volume = Math.min(1, volume);
+        audio.playbackRate = 1 + (volume * 0.5);
+        
+        volumeSlider.value = Math.min(100, volume * 100);
+    }
+}
+
+function handleSliderChange() {
+    volume = volumeSlider.value / 100;
+    audio.volume = volume;
+    audio.playbackRate = 1 + (volume * 0.5);
+}
+
+
+function initializeGame() {
+    moveBtn();
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    realBtn.addEventListener('click', handleRealButtonClick);
+    
+    document.addEventListener('click', handleFirstClick, { once: true });
+    document.addEventListener('click', handleVolumeIncrease);
+    volumeSlider.addEventListener('input', handleSliderChange);
+}
+
+window.onload = initializeGame;
